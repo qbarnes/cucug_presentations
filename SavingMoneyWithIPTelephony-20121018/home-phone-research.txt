@@ -1,0 +1,118 @@
+Keep Your Number is a must-have.
+
+Using your own device?
+
+What about taxes?
+
+http://www.whichvoip.com/
+http://www.whichvoip.com/voip-provider-all.htm#Res_providers
+
+http://www.phonepower.com/services/voip/resdetail.aspx?pid=129
+	Keep Your Number
+	Seems really good.
+	Free calling in U.S. and Canada
+	Service area?
+	Great web site
+	$8.33/mo (with 2 year commitment)
+	http://www.voipreview.org/reviews/phone-power
+
+http://www.itpvoip.com/Special/?tracking_id=2808
+	Lame web site
+	Seems pricy for Voip.
+	http://www.voipreview.org/reviews/itp
+	$8.32/mo according to site, but really $9.99 (incl 500 min)
+
+http://www.voipo.com/voip.shtml
+	Keep Your Number
+	starting at $8.25/mo
+	$5.38/mo for 24 month commitment
+	Includes unlimited US/Can, 60 min Intl
+	http://www.voipreview.org/reviews/voipo
+
+http://www.viatalk.com/
+	Can't keep number?
+	http://www.voipreview.org/reviews/viatalk
+
+http://www.callcentric.com/
+	Can keep number.  $25 fee
+	Per call rate.  $1.95/mo + 0.015/min.
+	E911 $1.50/mo
+	$6.95/mo for 500 NA mins (incl E911 fee)
+	http://www.dslreports.com/comments/3050
+
+http://www.phone.com/
+	$9.88/mo unlimited
+	Free Number Porting
+	http://www.voipreview.org/reviews/phone.com
+
+RingCentral
+	$9.95/mo
+
+Lingo
+	International calling plans
+
+JoiPhone
+	$6.95/mo (when prepay 12 months)
+	$7.49/mo
+	Keep Your Number
+	Free equipment.
+	Free 100 minutes.
+	http://www.joiphone.com/features.htm
+
+VoIP.com
+	http://voip.com/index.aspx
+	http://www.voipreview.org/reviews/voip.com
+
+Vonage
+	Keep Your Number
+	11.99/mo incl 300 minutes.
+
+Review sites:
+
+http://www.voipreview.org/
+http://www.whichvoip.com/
+http://www.nextadvisor.com/voip_services/index.php
+http://www.nextadvisor.com/voip_services/compare.php
+http://www.cheap-home-phone-service.com/
+
+http://www.voipreview.org/voip_equipment
+http://www.cisco.com/en/US/products/ps10027/index.html
+http://www.abptech.com/products/cisco/ata.html
+http://www.amazon.com/Cisco-SPA3102-Voice-Gateway-Router/dp/B000FKP55U
+http://www.amazon.com/Cisco-PAP2T-Internet-Adapter-Voice-over-IP/dp/B000HCX7UG
+http://www.amazon.com/Linksys-Broadband-Phone-Ports-RTP300/dp/B000HCTMZK
+http://www.amazon.com/OBi110-Service-Bridge-Telephone-Adapter/dp/B0045RMEPI
+http://www.amazon.com/Grandstream-HandyTone-502-adapter-Ethernet/dp/B002FA1MUK
+http://www.amazon.com/Grandstream-HandyTone-HT286-Phone-Adapter/dp/B0027IDQC2
+http://allo.com/all-products.html#ata-cra210
+
+http://voxilla.com/voxilla/tools/device-configuration-wizard/linksys-spa2102-configuration-wizard
+http://www.callcentric.com/support/device/linksys/pap2
+http://www.callcentric.com/faq/8/100
+http://www.callcentric.com/faq/9#225
+http://www.callcentric.com/faq/9#226
+http://www.dslreports.com/forum/r19073573-Callcentric-which-codec
+# Great list for spa2102 configuration for callcentric.  Double check.
+http://blog.cqvoip.net/2009/12/configuring-linksyscisco-spa2102-with.html
+
+QoS:
+http://www.dslreports.com/forum/r26288599-QOS-settings-for-Linksys-SPA2102
+
+Call rate
+Sep	16 calls
+Aug	 5 calls
+Jul	12 calls
+Jun	 8 calls
+May	15 calls
+Apr	12 calls
+Mar	23 calls
+Feb	20 calls
+Jan	 6 calls
+Dec	18 calls
+Nov	23 calls
+Oct	17 calls
+Sep	32 calls
+Aug	44 calls
+Jul	48 calls
+
+Averaged .02 to .03 per call

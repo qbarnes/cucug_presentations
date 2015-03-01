@@ -1,0 +1,40 @@
+Router > Wan Setup
+	Primary NTP Server -> 0.pool.ntp.org
+	Maximum Uplink Speed (Kbps) 128 -> 1200
+
+Voice > Regional
+	Time Zone GMT-06:00
+
+Voice > SIP
+	RTP Packet Size 0.030 -> 0.020
+	G729a Codec Name G729a -> G729
+	G729b Codec Name G729ab -> G729
+
+Voice > Line 1
+	NAT Mapping Enable no -> yes
+	NAT Keep Alive Enable no -> yes
+	Proxy -> callcentric.com
+	Outbound Proxy -> callcentric.com
+	Use Outbound Proxy no -> yes
+	Use DNS SRV no -> yes
+	DNS SRV Auto Prefix no -> yes
+	User ID -> 1777MYCCID
+	Password -> xxxxxxxxxxx
+	Auth ID -> 1777MYCCID
+	Use Auth ID no -> yes
+	Preferred Codec G711u -> G711u
+	DTMF Tx method Auto -> Auto
+	Dial Plan
+	  (*xx|[3469]11|0|00|[2-9]xxxxxx|1xxx[2-9]xxxxxxS0|xxxxxxxxxxxx.) ->
+	  (*xx.|*xxx|*75xx|[3469]11|0|00|1xxx[2-9]xxxxxxS0|xxxxxxxxxxxx.|**275*x.)
+
+http://voxilla.com/voxilla/tools/device-configuration-wizard/linksys-spa2102-configuration-wizard
+
+(*xx.|*xxx|*75xx|[3469]11|0|00|<:1217>[2-9]xxxxxx|1xxx[2-9]xxxxxxS0|xxxxxxxxxxxx.|**275*x.)
+
+(*xx.|*xxx|*75xx|[3469]11|0|00|<:1217>[2-9]xxxxxx|1xxx[2-9]xxxxxxS0|<:1>[2-9]xx[2-9]xxxxxxS0|xxxxxxxxxxxx.|**275*x.)
+
+
+Set Airport extreme to map through SIP UDP and TCP ports 5060-5080 and
+RTP UDP and TCP ports 16384-16394 through to the ATA.  The range in the
+ATA for RTP ports is from 16384-16482.
