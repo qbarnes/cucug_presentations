@@ -1,0 +1,67 @@
+FireWalls
+	What is a firewall
+	Why it is a good idea
+	Software vs. Hardware firewalls
+	Why use a hardware solution
+		Always on
+		NT / Mac
+			configuration changes (upgrades)
+			file / printer sharing
+	NAT / Multiple Machines
+
+Netgear RT311/RT314
+	Good
+		Customer Support
+		Compact
+	Bad
+		Cost ($80 / $130)
+		Mercy of the company to maintain (software upgrades)
+		Limited configurability of software
+		Dedicated hardware (no reuse or expandability)
+
+Roll Your Own
+	Sources for hardware
+		Ebay
+		Aussie Computers
+	Hardware
+		Support list
+		CPU
+		Memory
+		Disk
+		Motherboard
+			BIOS
+			PCI Slots
+			Built-ins (video, enet)
+		Ethernet cards
+		Floppy
+		Manufacturer (Compaq, HP, Dell)
+	Software (Operating System)
+		OpenBSD
+		OpenBSD vs. FreeBSD/NetBSD/Linux
+	Networking
+		NAT
+		DHCP / dhclient
+		SSH (Secure Shell)
+		Telnet / FTP
+	Advanced Topics
+		Logging (tcpdump)
+		Fetchmail
+		Named
+		sendmail
+		VPN
+		Apache
+		Static IPs
+		Domain name registering
+
+Other Issues
+	QuickTime
+	Games
+	@Home Security Scans
+
+Web Sites
+	www.openbsd.org
+	www.netgear.com
+	www.firewall.com
+	www.dyndns.org
+	www.deja.com
+	www.sendmail.org
