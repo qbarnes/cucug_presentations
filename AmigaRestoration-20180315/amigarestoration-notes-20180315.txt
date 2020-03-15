@@ -1,0 +1,116 @@
+Amiga
+	I have three Amigas, 2 2000's and 1 3000.
+
+	My journey started with wanting to get them back to
+	functioning.  The two 2000's are currently up and running
+	just fine, hard drives backed up, real-time batteries
+	replaced, and somewhat cleaned up.
+
+	All the cards are fully working.
+
+	The hard drives worked allowing me to completely back them
+	up.  I'll get to how I did that later.
+
+	The Amiga 3000 didn't make it.  It had what I think was too
+	much battery damage to the motherboard.  It seems to work,
+	but has no video output.
+
+	This is one of my Amiga 2000's.  This one right here was my
+	workhorse system up until about November 1997.  It has a
+	GVP 68030 accelerator card.  A GVP Series II SCSI card.
+	A Multiface Card 3 with two high speed serial ports and
+	a high speed parallel port.  A Commodore A2060 Arcnet card.
+	It uses a RG/62 coax cable and could go up to ~300kB/s.
+
+	Amigas were NTSC output devices, a/k/a television scan
+	rates of 15.5kHz.  RGB monitors _start_ at 31kHz.
+
+        This Amiga has a A2320 scan doubler card that doubles the
+        frequency allowing me to display its video over a standard
+        RGB connector.
+
+	I can show you all the insides later.
+
+Wimodem232
+	The Wimodem232 is available from CBM.  Their web site is
+	cbmstuff.com.
+
+        The Wimodem 232 turns your standard Wifi into what makes it
+        look like an old RS232 modem to your computer using Hayes
+	AT commands.  As far as your computer is concerned, it is
+	an old Hayes compatible modem.
+
+        Boards are $45, or $55 with OLED display.  I got the one
+        with the display.  It is worth the $10 over just the LEDs.
+        It shows state of the board and real time status of the
+        connection at a glance.
+
+	It runs on USB power via a mini-USB cable.
+
+	The creator is available via email and responds very quickly.
+
+	It connects to a DB25 serial port on most any computer no
+	matter how old.  Haven't tried it on my TRS-80 Model I's yet!
+
+	The board goes up to 230400 baud.
+
+	For this demo I'll be using it at 38400 using the Amiga's
+	native serial port.  The Amiga's native port can't reliably
+	go beyond 38400.
+
+        I have the Multiface Card 3 board in this computer that goes
+        up to 115200 baud, but I've had problems interfacing it with
+        the Wimodem232.  I don't know why or who's fault it is.  The
+        Wimodem232 works just fine on the native port.  Anything
+        else I've connected up to the high speed serial card has
+        worked fine, but the two together just don't get along.
+
+        Aside from all the old hardware in here, I have some new
+        hardware--what is known as a SCSI2SD version 5 card.  The
+        card sells for $55.  It allows my computer's SCSI card to
+        talk with a regular micro SD card!  This is what I use now
+        instead of an old fashion hard drive.
+
+	It is pretty good.  I have one problem with it I haven't
+	sorted out yet.  It doesn't work right immediately upon
+	old power up.  But after a restart, it works just fine
+	after that.  I'm sure there's just something I need to
+	tweak in its configuration.  I'll show you the card later.
+
+	One failed path (so far) is an IDE to Compact Flash card.
+	The adaptor is only $5 from monoprice.com.  It, however,
+	disagrees with the IDE controller on my Amiga's GVP '030
+	card.  Since I got the SCSI2SD card working though, I
+	haven't spent much time tinkering with it.
+
+	I'm considering buying an oscilloscpe for debugging the
+	Amiga's video problem.  The 'scope I'm considering is a
+	Rigol DS1052E 50MHz Digital Oscope with 2 Channels.  It
+	sells for $259 on Amazon with free shipping and can be
+	firmware upgraded (hacked) to 100 MHz.
+
+BBSes
+	BBSes still exist!  They are available on the Internet!
+
+	If you'd like to get a list, a web site to check is
+	http://www.telnetbbsguide.com.  I'll take you to one
+	of the sites this evening and bring back some old
+	memories.
+
+PPP
+        Back in the day we used to have to run the internet over
+        SLIP or PPP.  Most everyone moved from SLIP to PPP by the
+        time cable modems made their appearance.
+	
+	I thought it would be fairly straight forward getting PPP
+	going.  I was wrong!  It took a lot of pain and suffering
+	to get it going, more than the rest of the restoration
+	project -- and I'm still not there fully yet.  I'm close
+	and have it hobbling, but it still has a lot of issues.
+
+Now on to the Demo!
+
+Terminus
+	amigacity.xyz 23
+
+Termite TCP
