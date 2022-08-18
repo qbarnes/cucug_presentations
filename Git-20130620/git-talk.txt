@@ -1,0 +1,55 @@
+Overview
+   What is git
+   What can it be used for, big stuff, little stuff
+   What's a repo
+
+
+Installing Git
+   - Packages are available for most all Linux distros
+   - Can be built from source
+       http://git-scm.com/book/en/Getting-Started-Installing-Git
+   - Is also available for Windows (native and cygwin) and for Mac
+
+
+"git" command format
+   - git <command>
+
+
+Git help
+   - "git help <command>" or "man git-<command>" (e.g. "man git-commit")
+   - man gittutorial
+
+
+Initial config
+    $ git config --global user.name "My Name"
+    $ git config --global user.email "me@mysite.com"
+    $ git config -l
+
+
+Creating a new repo
+    $ git init
+    $ get add .
+
+The ".git" directory
+   - How the layout is different from other SCMs.
+
+Making and recording a change
+    $ vi ...
+    $ git status
+    $ git commit -a
+    $ git log  # auto-paging
+    $ git show <sha>:filename
+    $ git diff <sha>..<sha> -- filename
+
+Cloning a repo
+    $ git clone ...
+    $ git remote -v
+    $ git pull
+
+
+Github
+    Create an account
+    Make a repo
+    Clone it
+    # http://www.nicemice.net/par/
+    # http://www.nicemice.net/par/Par152.tar.gz
