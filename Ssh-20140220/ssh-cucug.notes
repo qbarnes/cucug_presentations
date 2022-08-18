@@ -1,0 +1,67 @@
+ssh
+    Examples:
+    ssh myserver
+    ssh other@myserver or ssh -l other myserver
+    ssh -p 2222 fredsserver.org
+
+Generating your keys
+    ssh-keygen -t rsa -C "A comment"
+	~/.ssh/id_rsa
+	~/.ssh/id_rsa.pub
+
+    Don't forget your passphrase!
+
+    ssh-keygen -p newpassphrase
+
+    Can make keys authorized with a certificate.
+    Certificates and expire or be revoked.
+    Can be used to control features.
+    Really only useful for site admins, etc.
+
+~/.ssh/
+	config
+	authorized_keys
+	known_hosts
+
+ssh-agent
+	env | egrep 'SSH_AGENT_PID|SSH_AUTH_SOCK'
+
+	Autostarting
+	Add "ssh-add" to a ~/.xsession or (may be old) for:
+	KDE
+	    mkdir ~/.kde/Autostart
+	    ln -s /usr/bin/ssh-add ~/.kde/Autostart
+
+	Gnome
+	    "System" menu > "Preferences" > "More Preferences" > "Sessions".
+	    Under the "Startup Programs" tab, add the ssh-add program. 
+
+ssh-add
+ssh-add -l
+
+/etc/ssh_config or /etc/ssh/ssh_config
+/etc/sshd_config or /etc/ssh/sshd_config
+	HUPping sshd
+
+~/.ssh/config
+	ForwardAgent yes
+	X11Forwarding yes
+
+ssh -X
+xauth
+
+On enemycanmeet, opens port 4022 on enemycanmeet that connects to
+port 22 on laetitia when I can't get to laetitia from enemycanmeet:
+$ ssh -L 4022:laetitia.inktomisearch.com:22 login1
+
+On login1, opens port 4022 on laetitia that connects to port 22
+on actionstrike:
+$ ssh -R 4022:actionstrike.champ:22 laetitia.inktomisearch.com
+
+screen ksh -c "while : ;do ssh -24N -o 'ExitOnForwardFailure yes' home-tunnel;sleep 30;done"
+
+export authfile=/tmp/$LOGNAME-$DISPLAY.auth
+xauth list | grep `echo $DISPLAY |cut -c10-12` > $authfile
+chmod 600 $authfile
+
+sudo ksh -c "xauth add `cat $authfile`;cmd"

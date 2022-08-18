@@ -1,0 +1,47 @@
+			SSH family of commands to know
+
+// This is it!  :-)
+ssh
+    Examples:
+      ssh myserver
+      ssh other@myserver or ssh -l other myserver
+      ssh -X mydesktop
+      ssh -p 2222 fredsserver.org
+      ssh -L 4022:joesserver.com:22 marysserver.org
+      ssh -R 4022:marysserver.org:22 joesserver.com
+      screen sh -c "while : ;do ssh -24N -o 'ExitOnForwardFailure yes' home-tunnel;sleep 30;done"
+
+
+// Holds the user's private keys, runs as a personal daemon
+ssh-agent
+    Examples:
+      eval $(ssh-agent -s)
+
+
+// Command line interface to ssh-agent
+ssh-add
+    Examples:
+      ssh-add
+      ssh-add -l
+      ssh-add -D
+
+
+// Generates and operates on an encryption key pair
+    Examples:
+      ssh-keygen -t rsa -C "A comment"
+      ssh-keygen -t dsa
+      ssh-keygen -t rsa -p
+
+
+// Files to know
+	~/.ssh/id_rsa
+	~/.ssh/id_rsa.pub
+	~/.ssh/id_dsa
+	~/.ssh/id_dsa.pub
+	~/.ssh/id_identity
+	~/.ssh/id_identity.pub
+	~/.ssh/config
+	~/.ssh/authorized_keys
+	~/.ssh/known_hosts
+	/etc/{ssh/,}/ssh_config
+	/etc/{ssh/,}/sshd_config
