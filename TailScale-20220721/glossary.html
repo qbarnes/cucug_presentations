@@ -1,0 +1,51 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title></title></head><body><h1>Tailscale Glossary</h1>
+<p><strong>Coordination Server</strong>:</p>
+<p>A machine on the Internet that coordinates and configures your
+<em>Nodes</em> for you.</p>
+<p>A Coordination Server is a service provided by <em>Tailscale</em> or
+can be self-hosted by Headscale.</p>
+<p><strong>DERP (Designated Encrypted Relay for Packets)</strong>:</p>
+<p>A server that acts as a Relay between two <em>Nodes</em> that can’t
+communicate directly because of firewall restrictions or NATs.
+Uses HTTPS to tunnel.</p>
+<p>DERPs are provided for free by <em>Tailscale</em> or you can also
+register your own DERPs for your <em>Tailnet</em> to reduce latency.</p>
+<p><strong>Exit Node</strong>:</p>
+<p>A <em>Node</em> that provides routing outside of its <em>Tailnet</em> to
+the Internet.</p>
+<p><strong>Headscale</strong>:</p>
+<p>A free and open source, 3rd party software package that
+can be used to self-host your own <em>Coordination Server</em>.
+See <a href="https://github.com/juanfont/headscale">https://github.com/juanfont/headscale</a>.</p>
+<p><strong>Hub and Spoke Network</strong>:</p>
+<p>A network where machines route all their network traffic through a
+central server (<em>Relay</em>).</p>
+<p><strong>Mesh Network</strong>:</p>
+<p>A network where the machines communicate directly with each other
+without passing through a <em>Relay</em>.</p>
+<p><strong>Node</strong>:</p>
+<p>A machine registered in a private tailscale network (<em>Tailnet</em>).</p>
+<p><strong>Relay</strong>:</p>
+<p>A server that acts as an invisible intermediary between two
+other machines to route their packets to each other.</p>
+<p><strong>Shared Node</strong>:</p>
+<p>A <em>Node</em> that appears in one or more <em>Tailnets</em> simultaneously.</p>
+<p><strong>Subnet Router</strong>:</p>
+<p>A <em>Node</em> that provides routing to a local network, so machines that
+are not participating in its <em>Tailnet</em> can be accessed.</p>
+<p><strong>Taildrop</strong>:</p>
+<p><em>Tailscale</em> feature that allows copying files between devices on
+your <em>Tailnet</em>.</p>
+<p><strong>Tailnet</strong>:</p>
+<p>A set of machines (Nodes) connected together in a private
+<em>Tailscale</em> network.</p>
+<p><strong>Tailscale</strong>:</p>
+<p>A software product that allows you to connect machines together
+anywhere with Internet access in a private <em>Mesh Network</em>.</p>
+<p>Also, the company that makes the <em>Tailscale</em> product, see
+<a href="https://tailscale.com/">https://tailscale.com/</a></p>
+<p>See <em>Headscale</em>.</p>
+<p><strong>Tailscale IP Address</strong>:</p>
+<p>A unique IP address assigned to each <em>Node</em> on your <em>Tailnet</em>.
+They are all in the range 100.x.y.z (e.g. 100.10.25.30).</p>
+</body></html>
