@@ -1,0 +1,51 @@
+CUCUG Linux SIG - April 21, 2022
+
+
+Raspberry Pi4 Model B - 8GB, $75
+	BCM2711 - Quad core Cortex-A72, ARMv8, 64-bit, 1.5Ghz
+	Ethernet, wifi, Bluetooth
+	Power Supply
+		USB-C, 3A, $8
+	HDMI Cable
+		micro-HDMI to standard HDMI Cable, $5.00
+	Enclosure
+		grey, $5
+	SD Card (16GB or larger)
+
+Raspberry Pi Zero WH - 512MB, $14 (WH), $10 w/o header (W), $5 w/o wifi
+	BCM2835 - ARM11 processor, Single core, 1 GHz
+	Power Supply
+		MicroUSB, $8.25
+	HDMI Cable
+		Mini HDMI to HDMI Adapter, $5.94
+	USB hub
+		AuviPal 3-Port Micro USB OTG Hub Adapter, $14.99 (2)
+	Enclosure
+	SD Card
+
+Raspberry Pi OS (formeraly known has Raspbian, Raspberry + Debian)
+	32-bit vs. 64-bit versions
+	Recommended writing SD cards with OS via "rpi-imager" utility.
+
+rpi-imager
+	A file called ~/.config/Raspberry\ Pi/Imager.conf stores
+	configuration settings to be shared between images.  (File
+	may be stored in different places or have different names
+	on different distros.)
+	Wifi SSID and password, user account and password, ssh pub keys,
+	etc. can all be preconfigured.
+
+Other distros have RPi distro images as well
+	Fedora: https://arm.fedoraproject.org/
+	Ubuntu: https://ubuntu.com/raspberry-pi
+
+HAT (Hardware Attached on Top)
+	Daughter cards that attach on top of the Pis via the header
+	that extend functionality.
+
+Basic info:
+	https://www.raspberrypi.com/
+	https://www.raspberrypi.org/
+	https://en.wikipedia.org/wiki/Raspberry_Pi
+
+RPi Shopper scraper, rpilocator: https://rpilocator.com/
