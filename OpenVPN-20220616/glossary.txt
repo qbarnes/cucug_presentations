@@ -1,0 +1,59 @@
+Coordination Server -
+    A machine on the Internet that coordinates and configures your
+    Nodes for you.
+
+    A Coordination Server is a service provided by Tailscale or
+    can be self-hosted by Headscale.
+
+DERP (Designated Encrypted Relay for Packets) -
+    A server that acts as a Relay between two Nodes that can't
+    communicate directly because of firewall restrictions.
+
+    DERPs are provided for free by Tailscale or you can also
+    register your own DERPs for your Tailnet to reduce latency.
+
+Exit Node -
+    A Node that provides routing outside of its Tailnet to the
+    Internet.
+
+Headscale -
+    A free and open source, 3rd party software package that can
+    be used to self-host your own Coordination Server.
+    https://github.com/juanfont/headscale
+
+Hub and Spoke Network -
+    A network where machines route all their network traffic
+    through a central server (Relay).
+
+Mesh Network -
+    A network where all the machines communicate directly with
+    each other without a Relay.
+
+Node -
+    A machine registered in a private tailscale network (Tailnet).
+
+Relay -
+    A server that acts as an invisible intermediary between two
+    other machines to route their packets to each other.
+
+Subnet Router -
+    A Node that provides routing to a local (non-routable) network
+    so machines that are not participating in its Tailnet can be
+    accessed.
+
+Tailnet -
+    A set of machines (Nodes) connected together in a private
+    Tailscale network.
+
+Tailscale -
+    A software product that allows you to connect machines together
+    anywhere with Internet access in a private Mesh Network.
+
+    Also, the company that makes the Tailscale product:
+    https://tailscale.com/
+
+    Also see Headscale.
+
+Tailscale IP Address -
+    A unique IP address assigned to each Node on your Tailnet.
+    They are all in the range 100.x.y.z (e.g. 100.123.45.67).
