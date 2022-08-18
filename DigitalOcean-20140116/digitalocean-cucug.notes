@@ -1,0 +1,32 @@
+My problem - DynDNS
+  DynDNS Pro		 $25.00
+  .Org DR		 $15.00
+  Dyn Standard DNS	 $29.95
+  Dyn Standard SMTP	 $19.95
+  Dyn Email Gateway	 $49.95
+  			=======
+  			$139.85
+
+
+What's a VPS?
+  Virtual Private server
+
+Linode, DreamHost, Digital Ocean
+  $20/mo, $15/mo, $5/mo ($0.007/hr, $.168/day)
+
+Creating a droplet
+  Linux
+  15 flavors of Ubuntu
+  6 flavors of CentOS
+  4 flavors of Debian
+  2 flavors of Arch
+  6 flavors of Fedora
+  full root access
+  (shouldn't upgrade the kernel, but everything else)
+
+  Stacks:
+  LAMP, Wordless, Dokku, Docker, MEAN Ruby on Rails
+  Redmine, Gitlab, Ghost
+
+
+Installing software

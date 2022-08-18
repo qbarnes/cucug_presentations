@@ -1,0 +1,49 @@
+I gave a talk to the Linux SIG on my journey to find cheaper service
+provider and how it led me to my own Linux server on the Internet
+providing those services for significantly less.
+
+I've been a customer of DynDNS for 12 years.  I have been using them
+for my standard and dynamic DNS, domain registration, SMTP, and
+email gateway provider.  Every year without fail, they've raised my
+rates for those services to where they were now charging me $139.85
+a year.  That was just too much, so I set out to find another
+provider.
+
+I checked out dozens of other providers for the same list of
+services.  None are significantly cheaper for domain registration
+services, so I decided to leave that piece with DynDNS.  For the
+dynamic DNS service, there are several free providers, so I went
+with freedns.afraid.org.  For the remaining services, there are many
+choices.  The cheapest ones I could find with good reputations are
+around $70-$75/yr.  Still more than I thought those services are
+worth, but still substantially less than DynDNS.
+
+I was about to sign up with one of them, then it hit me.  On the
+"Linux Unplugged" podcast I listen to, they advertise Linux Virtual
+Private Servers (VPSes) by Digital Ocean for as low as $5/mo (along
+with their coupon code good for a $10 credit).  So I set off to
+answer my question of if I could really use a VPS to provide all
+those services.  For spending $5, I'd have my own VPS for three
+months to find out.
+
+After a week or so of tinkering, I could!
+
+Digital Ocean offers free DNS to its customers, so not a problem.  I
+could configure Postfix on my VPS to provide the SMTP and an email
+gateway services.  Their lowest end VPS includes more than enough
+disk space, CPU, and bandwidth to pull it all off, and it would run
+me only $60/yr, cheaper than any alternative I had found.  And I
+still get my very own Linux server on the Internet to play on and
+with full root access!
+
+I checked several other Linux and UNIX VPS providers to see if anyone
+could beat Digital Ocean's price structure for what I needed.  They
+couldn't come close.
+
+So after explaining all this lead-in to the SIG, I demoed Digital
+Ocean's web site, features, and services showing how to spin up
+a brand new Linux VPS in about a minute, logging in with root,
+and doing Linux user and administrative functions.  Digital Ocean
+doesn't really charge by the month.  They charge by the hour,
+$0.007/hr.  So to create a brand new Linux Ubuntu VPS and show it
+off to the SIG costs me but one penny!
