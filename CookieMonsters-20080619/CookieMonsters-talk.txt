@@ -1,0 +1,98 @@
+Cookie Monsters
+
+How web sites learn about you, your preferences, and why.
+
+"On the Internet, nobody knows you're a dog."
+
+That may be true, but it doesn't take long for them to figure
+out that the user on the other end has a strange obsession with
+frisbees.
+
+A lot of people are concerned about privacy on the Internet.  I
+want to give you an overview so you can understand how it works.
+
+The first time you visit a web site, it knows very little about you.
+Your Internet Service Provider assigned your computer unique number.
+From that number a web site might have a good guess at where you
+live, at least the country you live in, but other than that, it
+knows nothing about you.
+
+So how does a web site figure it all out?
+
+Anytime you visit a web site, your browser can pick up "cookies".
+
+A cookie is a bit of information that a browser squirrels away on
+behalf of the site.  It can contain anything the site wants to save
+in it.  Web sites use their cookies to learn about their users and
+their interests.
+
+Every click you make on a web site, that web site learns something.
+The more it learns about you, the more "helpful" it can be.
+
+Say you go to the Yahoo news site and often click on soccer scores.
+Yahoo could store that in a cookie, and then when you come back
+later, it might put up soccer scores and news on the front page for
+you to make them easier to find.
+
+Web sites each have their own cookies.  They don't share.  Yahoo
+will have their own cookies where Google has its own.
+
+But from the web site's viewpoint, there's a problem with these
+cookies.  If you go to another computer, the web site has to start
+all over.  If you share a computer with different people, the
+information gets befuddled.  Say your daughter uses the computer and
+plays a Spongebob trivia game on Yahoo.  Not knowing you're different
+people, Yahoo might start thinking you're a Spongebob fan.
+
+To stop this confusion, web sites want you to just have one type
+of cookie, a cookie that uniquely identifies you.  That way they
+can store all the profiling information on their servers and that
+profile stays with you no matter where you go or what computer
+you use.
+
+Why would sites like Google and Yahoo offer "free" e-mail since it
+obviously costs them money to provide?  The first thing people want
+to do when they get to a computer is to check their e-mail.  Once
+you've logged in to check it, they can now follow what you do on
+their web site -- read movie reviews, read news stories, search for
+new jobs -- and put it in your profile.
+
+Sites have two objectives in collecting this information.  The
+"nice" one is what I mentioned before, personalizing the site to
+make it more interesting to you so you'll come back more often
+and stay longer.  The other reason is to make money.
+
+It's all about marketing those little ads we all see.  The happier
+you are using a web site, the more time you'll want to spend on it.
+The more time you're there, the more ads you'll see.
+
+And by learning as much as it can about you, a web site can choose
+ads you're more likely to look at and click on.  When you click on
+it, the site gets a little bit of money.  A few clicks here and
+there add up to millions of dollars in revenue.
+
+Still, if you don't like web sites collecting this information,
+don't log in, or just log in while reading e-mail then log out, and
+set your browser to delete its cookies when you quit.  Web sites
+also have privacy statements.  A privacy statement tells you what
+information the web site collects and what they do with it.  Read it
+so you can know what it is.
+
+But if you think about it, all this is all pretty harmless data
+because these free web sites don't know who you really are -- your
+name and address -- nor do they care.  They just want profiling data
+so they hopefully can put ads up you're more likely to click on so
+they can make money and stay in business.
+
+So if you're concerned about privacy, what should you worry about?
+
+Take a look at the picture.  Who know who you really are -- your
+real name and real address?  Who knows every single web site and
+every single web page you've ever visited?
+
+You're Internet Service Provider.
+
+If you're really concerned about your privacy, don't worry about web
+sites.  Instead, be aware of what laws control what data your ISP
+collects on you and then what they can do with it such as sell it or
+give copies to government agencies.
