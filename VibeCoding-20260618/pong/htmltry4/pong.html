@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PONG</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Courier New', monospace;
+    }
+    canvas {
+      display: block;
+      border: 2px solid #00ff41;
+      box-shadow: 0 0 20px #00ff41, 0 0 60px #003311;
+    }
+    #ui {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    #controls {
+      font-size: 12px;
+      color: #007722;
+      letter-spacing: 0.08em;
+      text-align: center;
+    }
+    #modeWidget {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    #modeLabel {
+      font-size: 11px;
+      color: #007722;
+      letter-spacing: 0.15em;
+    }
+    #modeToggle {
+      display: flex;
+      border: 2px solid #00ff41;
+      box-shadow: 0 0 8px #00ff41;
+    }
+    .modeOpt {
+      background: #000;
+      color: #007722;
+      border: none;
+      font-family: 'Courier New', monospace;
+      font-size: 16px;
+      font-weight: bold;
+      width: 36px;
+      height: 32px;
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+    }
+    .modeOpt:first-child {
+      border-right: 2px solid #00ff41;
+    }
+    .modeOpt.active {
+      background: #00ff41;
+      color: #000;
+    }
+    .modeOpt:not(.active):hover {
+      color: #00ff41;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="pong" width="800" height="500"></canvas>
+  <div id="ui">
+    <div id="modeWidget">
+      <div id="modeLabel">PLAYERS</div>
+      <div id="modeToggle">
+        <button class="modeOpt active" id="btn1">1</button>
+        <button class="modeOpt"        id="btn2">2</button>
+      </div>
+    </div>
+    <div id="controls"></div>
+  </div>
+  <script>
+    const canvas = document.getElementById('pong');
+    const ctx    = canvas.getContext('2d');
+
+    const W            = canvas.width;
+    const H            = canvas.height;
+    const PADDLE_W     = 12;
+    const PADDLE_H     = 80;
+    const PADDLE_SPEED = 6;
+    const BALL_R       = 6;
+    const SPEED_INIT   = 5;
+    const SPEED_MAX    = 15;
+    const GREEN        = '#00ff41';
+    const GREEN_DIM    = '#004d15';
+
+    const score = { left: 0, right: 0 };
+    const keys  = {};
+    let paused      = false;
+    let animId      = null;
+    let singlePlayer = true;
+
+    const btn1       = document.getElementById('btn1');
+    const btn2       = document.getElementById('btn2');
+    const controlsEl = document.getElementById('controls');
+
+    function updateModeUI() {
+      btn1.classList.toggle('active',  singlePlayer);
+      btn2.classList.toggle('active', !singlePlayer);
+      controlsEl.innerHTML = singlePlayer
+        ? 'COMPUTER &mdash; LEFT &nbsp;&nbsp;|&nbsp;&nbsp; &uarr;&darr; &mdash; RIGHT &nbsp;&nbsp;|&nbsp;&nbsp; SPACE &mdash; PAUSE'
+        : 'W/S &mdash; LEFT &nbsp;&nbsp;|&nbsp;&nbsp; &uarr;&darr; &mdash; RIGHT &nbsp;&nbsp;|&nbsp;&nbsp; SPACE &mdash; PAUSE';
+    }
+
+    function setMode(single) {
+      singlePlayer = single;
+      score.left   = 0;
+      score.right  = 0;
+      ball         = spawnBall();
+      updateModeUI();
+    }
+
+    btn1.addEventListener('click', () => setMode(true));
+    btn2.addEventListener('click', () => setMode(false));
+
+    updateModeUI();
+
+    const left  = { x: 20,              y: H/2 - PADDLE_H/2, w: PADDLE_W, h: PADDLE_H };
+    const right = { x: W - 20 - PADDLE_W, y: H/2 - PADDLE_H/2, w: PADDLE_W, h: PADDLE_H };
+
+    let ball = spawnBall();
+
+    function spawnBall() {
+      const dir   = Math.random() < 0.5 ? 1 : -1;
+      const angle = (Math.random() * 40 - 20) * Math.PI / 180;
+      return {
+        x:     W / 2,
+        y:     H / 2,
+        dx:    Math.cos(angle) * SPEED_INIT * dir,
+        dy:    Math.sin(angle) * SPEED_INIT,
+        speed: SPEED_INIT
+      };
+    }
+
+    document.addEventListener('keydown', e => {
+      keys[e.key] = true;
+      if (e.key === ' ') {
+        paused = !paused;
+        if (!paused) { cancelAnimationFrame(animId); loop(); }
+      }
+      if ([' ', 'ArrowUp', 'ArrowDown'].includes(e.key)) e.preventDefault();
+    });
+    document.addEventListener('keyup',   e => { keys[e.key] = false; });
+
+    function clampPaddle(p) {
+      p.y = Math.max(0, Math.min(H - p.h, p.y));
+    }
+
+    const AI_SPEED = 4.2;  // slightly slower than player to stay beatable
+
+    function updatePaddles() {
+      if (singlePlayer) {
+        // AI tracks ball center with a small dead zone to avoid jitter
+        const leftCenter = left.y + left.h / 2;
+        if (ball.y < leftCenter - 4)      left.y -= AI_SPEED;
+        else if (ball.y > leftCenter + 4) left.y += AI_SPEED;
+      } else {
+        if (keys['w'] || keys['W']) left.y -= PADDLE_SPEED;
+        if (keys['s'] || keys['S']) left.y += PADDLE_SPEED;
+      }
+
+      if (keys['ArrowUp'])   right.y -= PADDLE_SPEED;
+      if (keys['ArrowDown']) right.y += PADDLE_SPEED;
+      clampPaddle(left);
+      clampPaddle(right);
+    }
+
+    function reflect(paddle, side) {
+      const rel   = (ball.y - (paddle.y + paddle.h / 2)) / (paddle.h / 2);
+      const angle = rel * 65 * Math.PI / 180;
+      ball.speed  = Math.min(ball.speed + 0.4, SPEED_MAX);
+      ball.dx     = Math.cos(angle) * ball.speed * side;
+      ball.dy     = Math.sin(angle) * ball.speed;
+    }
+
+    function updateBall() {
+      ball.x += ball.dx;
+      ball.y += ball.dy;
+
+      // Top / bottom walls
+      if (ball.y - BALL_R <= 0)  { ball.y = BALL_R;      ball.dy =  Math.abs(ball.dy); }
+      if (ball.y + BALL_R >= H)  { ball.y = H - BALL_R;  ball.dy = -Math.abs(ball.dy); }
+
+      // Left paddle
+      if (ball.dx < 0 &&
+          ball.x - BALL_R <= left.x + left.w &&
+          ball.x + BALL_R >= left.x &&
+          ball.y + BALL_R >= left.y &&
+          ball.y - BALL_R <= left.y + left.h) {
+        ball.x = left.x + left.w + BALL_R;
+        reflect(left, 1);
+      }
+
+      // Right paddle
+      if (ball.dx > 0 &&
+          ball.x + BALL_R >= right.x &&
+          ball.x - BALL_R <= right.x + right.w &&
+          ball.y + BALL_R >= right.y &&
+          ball.y - BALL_R <= right.y + right.h) {
+        ball.x = right.x - BALL_R;
+        reflect(right, -1);
+      }
+
+      // Scoring
+      if (ball.x < -BALL_R)      { score.right++; ball = spawnBall(); }
+      if (ball.x > W + BALL_R)   { score.left++;  ball = spawnBall(); }
+    }
+
+    function drawCenterLine() {
+      ctx.strokeStyle = GREEN_DIM;
+      ctx.lineWidth   = 2;
+      ctx.setLineDash([12, 10]);
+      ctx.beginPath();
+      ctx.moveTo(W / 2, 0);
+      ctx.lineTo(W / 2, H);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    function drawScore() {
+      ctx.fillStyle  = GREEN;
+      ctx.font       = 'bold 52px "Courier New", monospace';
+      ctx.textAlign  = 'right';
+      ctx.fillText(score.left,  W / 2 - 28, 66);
+      ctx.textAlign  = 'left';
+      ctx.fillText(score.right, W / 2 + 28, 66);
+    }
+
+    function drawPaddle(p) {
+      ctx.fillStyle = GREEN;
+      ctx.shadowColor  = GREEN;
+      ctx.shadowBlur   = 8;
+      ctx.fillRect(p.x, p.y, p.w, p.h);
+      ctx.shadowBlur = 0;
+    }
+
+    function drawBall() {
+      ctx.fillStyle   = GREEN;
+      ctx.shadowColor = GREEN;
+      ctx.shadowBlur  = 12;
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, BALL_R, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    function drawPauseOverlay() {
+      ctx.fillStyle = 'rgba(0,0,0,0.55)';
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle    = GREEN;
+      ctx.shadowColor  = GREEN;
+      ctx.shadowBlur   = 16;
+      ctx.textAlign    = 'center';
+      ctx.font         = 'bold 40px "Courier New", monospace';
+      ctx.fillText('PAUSED', W / 2, H / 2 - 10);
+      ctx.font         = '16px "Courier New", monospace';
+      ctx.shadowBlur   = 0;
+      ctx.fillStyle    = '#007722';
+      ctx.fillText('PRESS SPACE TO RESUME', W / 2, H / 2 + 30);
+    }
+
+    function draw() {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, W, H);
+
+      drawCenterLine();
+      drawScore();
+      drawPaddle(left);
+      drawPaddle(right);
+      drawBall();
+
+      if (paused) drawPauseOverlay();
+    }
+
+    function loop() {
+      if (paused) return;
+      updatePaddles();
+      updateBall();
+      draw();
+      animId = requestAnimationFrame(loop);
+    }
+
+    loop();
+  </script>
+</body>
+</html>

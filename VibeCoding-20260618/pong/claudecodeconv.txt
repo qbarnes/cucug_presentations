@@ -1,0 +1,674 @@
+╭─── Claude Code v2.1.153 ─────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│                   Welcome back Q!                  │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ What's new              │
+│                        ▘▘ ▝▝                       │ Sub-agents can now spa… │
+│   Sonnet 4.6 · Claude Pro · qbarnes@gmail.com's    │ Amazon Bedrock now rea… │
+│   Organization                                     │ Added a search bar whe… │
+│   ~/…/cucug_presentations/VibeCoding-20260618      │ /release-notes for more │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+
+❯ Make me a Pong-style game in a single HTML file, two paddles, score display,  
+  retro green-on-black look.                                                    
+
+● I'll create the Pong game as a single self-contained HTML file.
+
+● Write(pong.html)
+  ⎿  Wrote 213 lines to pong.html
+       2 <html lang="en">
+       3 <head>
+       4   <meta charset="UTF-8">
+       5   <meta name="viewport" content="width=device-width, initial-sca
+         le=1.0">
+       6   <title>PONG</title>
+       7   <style>
+       8     * { margin: 0; padding: 0; box-sizing: border-box; }
+       9     body {
+      10       background: #000;
+     … +215 lines (ctrl+o to expand)
+
+● pong.html is ready. Here's what's in it:
+
+  Controls
+  - W / S — left paddle up/down
+  - ↑ / ↓ — right paddle up/down
+  - Space — pause/resume
+
+  Features
+  - Retro green-on-black palette with a subtle glow effect on the ball, paddles,
+   and canvas border
+  - Ball angle varies based on where it hits the paddle (edge hits = steep
+  angle, center = shallow)
+  - Ball speeds up slightly on each paddle hit, capped at a max speed
+  - Dashed center line, large score display
+  - Clean pause overlay
+
+  Open pong.html directly in any browser — no server needed.
+
+✻ Baked for 55s
+
+❯ Can you adjust the game so that the computer plays the left paddle?           
+
+● I'll replace the W/S keyboard logic with AI tracking for the left paddle.
+
+● Update(pong.html)
+  ⎿  Added 9 lines, removed 4 lines
+      83        p.y = Math.max(0, Math.min(H - p.h, p.y));
+      84      }
+      85  
+      86 +    const AI_SPEED = 4.2;  // slightly slower than player to st
+         +ay beatable                                                    
+      87 +                                                               
+      88      function updatePaddles() {
+      87 -      if (keys['w'] || keys['W']) left.y  -= PADDLE_SPEED;     
+      88 -      if (keys['s'] || keys['S']) left.y  += PADDLE_SPEED;     
+      89 -      if (keys['ArrowUp'])        right.y -= PADDLE_SPEED;     
+      90 -      if (keys['ArrowDown'])      right.y += PADDLE_SPEED;     
+      89 +      // AI tracks ball center with a small dead zone to avoid 
+         +jitter                                                         
+      90 +      const leftCenter = left.y + left.h / 2;                  
+      91 +      if (ball.y < leftCenter - 4)      left.y -= AI_SPEED;    
+      92 +      else if (ball.y > leftCenter + 4) left.y += AI_SPEED;    
+      93 +                                                               
+      94 +      if (keys['ArrowUp'])   right.y -= PADDLE_SPEED;          
+      95 +      if (keys['ArrowDown']) right.y += PADDLE_SPEED;          
+      96        clampPaddle(left);
+      97        clampPaddle(right);
+      98      }
+
+● Update(pong.html)
+  ⎿  Added 1 line, removed 1 line
+      31  </head>
+      32  <body>
+      33    <canvas id="pong" width="800" height="500"></canvas>
+      34 -  <div id="controls">W / S &mdash; LEFT PADDLE &nbsp;&nbsp;|&nb
+         -sp;&nbsp; &uarr; / &darr; &mdash; RIGHT PADDLE &nbsp;&nbsp;|&nb
+         -sp;&nbsp; SPACE &mdash; PAUSE</div>                            
+      34 +  <div id="controls">COMPUTER &mdash; LEFT PADDLE &nbsp;&nbsp;|
+         +&nbsp;&nbsp; &uarr; / &darr; &mdash; RIGHT PADDLE &nbsp;&nbsp;|
+         +&nbsp;&nbsp; SPACE &mdash; PAUSE</div>                         
+      35    <script>
+      36      const canvas = document.getElementById('pong');
+      37      const ctx    = canvas.getContext('2d');
+
+● Done. The left paddle is now CPU-controlled — it tracks the ball's center at
+  AI_SPEED = 4.2, which is slower than the player's PADDLE_SPEED = 6, so it's
+  beatable with sharp angle shots to the corners. The right paddle still uses
+  ↑/↓.
+
+✻ Baked for 16s
+
+❯ Can you place a button on the screen that allows the user to select between   
+  single player (using computer control for one paddle) and two player?         
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(pong.html)
+  ⎿  Added 23 lines, removed 1 line
+      20        border: 2px solid #00ff41;
+      21        box-shadow: 0 0 20px #00ff41, 0 0 60px #003311;
+      22      }
+      23 -    #controls {                                                
+      23 +    #ui {                                                      
+      24        margin-top: 14px;
+      25 +      display: flex;                                           
+      26 +      align-items: center;                                     
+      27 +      gap: 24px;                                               
+      28 +    }                                                          
+      29 +    #controls {                                                
+      30        font-size: 12px;
+      31        color: #007722;
+      32        letter-spacing: 0.08em;
+      33        text-align: center;
+      34      }
+      35 +    #modeBtn {                                                 
+      36 +      background: #000;                                        
+      37 +      color: #00ff41;                                          
+      38 +      border: 2px solid #00ff41;                               
+      39 +      font-family: 'Courier New', monospace;                   
+      40 +      font-size: 12px;                                         
+      41 +      letter-spacing: 0.1em;                                   
+      42 +      padding: 5px 14px;                                       
+      43 +      cursor: pointer;                                         
+      44 +      box-shadow: 0 0 8px #00ff41;                             
+      45 +      transition: background 0.15s, color 0.15s;               
+      46 +      white-space: nowrap;                                     
+      47 +    }                                                          
+      48 +    #modeBtn:hover {                                           
+      49 +      background: #00ff41;                                     
+      50 +      color: #000;                                             
+      51 +    }                                                          
+      52    </style>
+      53  </head>
+      54  <body>
+
+● Update(pong.html)
+  ⎿  Added 4 lines, removed 1 line
+      53  </head>
+      54  <body>
+      55    <canvas id="pong" width="800" height="500"></canvas>
+      56 -  <div id="controls">COMPUTER &mdash; LEFT PADDLE &nbsp;&nbsp;|
+         -&nbsp;&nbsp; &uarr; / &darr; &mdash; RIGHT PADDLE &nbsp;&nbsp;|
+         -&nbsp;&nbsp; SPACE &mdash; PAUSE</div>                         
+      56 +  <div id="ui">                                                
+      57 +    <button id="modeBtn">&#x22EE; 2 PLAYER</button>            
+      58 +    <div id="controls"></div>                                  
+      59 +  </div>                                                       
+      60    <script>
+      61      const canvas = document.getElementById('pong');
+      62      const ctx    = canvas.getContext('2d');
+
+● Update(pong.html)
+  ⎿  Added 26 lines, removed 2 lines
+       74  
+       75      const score = { left: 0, right: 0 };
+       76      const keys  = {};
+       77 -    let paused  = false;                                      
+       78 -    let animId  = null;                                       
+       77 +    let paused      = false;                                  
+       78 +    let animId      = null;                                   
+       79 +    let singlePlayer = true;                                  
+       80  
+       81 +    const modeBtn    = document.getElementById('modeBtn');    
+       82 +    const controlsEl = document.getElementById('controls');   
+       83 +                                                              
+       84 +    function updateModeUI() {                                 
+       85 +      if (singlePlayer) {                                     
+       86 +        modeBtn.textContent    = '⋮ 2 PLAYER';                
+       87 +        controlsEl.innerHTML   = 'COMPUTER &mdash; LEFT &nbsp;
+          +&nbsp;|&nbsp;&nbsp; &uarr;&darr; &mdash; RIGHT &nbsp;&nbsp;|&n
+          +bsp;&nbsp; SPACE &mdash; PAUSE';                              
+       88 +      } else {                                                
+       89 +        modeBtn.textContent    = '⋮ 1 PLAYER';                
+       90 +        controlsEl.innerHTML   = 'W/S &mdash; LEFT &nbsp;&nbsp
+          +;|&nbsp;&nbsp; &uarr;&darr; &mdash; RIGHT &nbsp;&nbsp;|&nbsp;&
+          +nbsp; SPACE &mdash; PAUSE';                                   
+       91 +      }                                                       
+       92 +    }                                                         
+       93 +                                                              
+       94 +    modeBtn.addEventListener('click', () => {                 
+       95 +      singlePlayer = !singlePlayer;                           
+       96 +      score.left   = 0;                                       
+       97 +      score.right  = 0;                                       
+       98 +      ball         = spawnBall();                             
+       99 +      updateModeUI();                                         
+      100 +    });                                                       
+      101 +                                                              
+      102 +    updateModeUI();                                           
+      103 +                                                              
+      104      const left  = { x: 20,              y: H/2 - PADDLE_H/2, w
+           : PADDLE_W, h: PADDLE_H };
+      105      const right = { x: W - 20 - PADDLE_W, y: H/2 - PADDLE_H/2,
+            w: PADDLE_W, h: PADDLE_H };
+      106  
+
+● Update(pong.html)
+  ⎿  Added 9 lines, removed 4 lines
+      135      const AI_SPEED = 4.2;  // slightly slower than player to s
+           tay beatable
+      136  
+      137      function updatePaddles() {
+      138 -      // AI tracks ball center with a small dead zone to avoid
+          - jitter                                                       
+      139 -      const leftCenter = left.y + left.h / 2;                 
+      140 -      if (ball.y < leftCenter - 4)      left.y -= AI_SPEED;   
+      141 -      else if (ball.y > leftCenter + 4) left.y += AI_SPEED;   
+      138 +      if (singlePlayer) {                                     
+      139 +        // AI tracks ball center with a small dead zone to avo
+          +id jitter                                                     
+      140 +        const leftCenter = left.y + left.h / 2;               
+      141 +        if (ball.y < leftCenter - 4)      left.y -= AI_SPEED; 
+      142 +        else if (ball.y > leftCenter + 4) left.y += AI_SPEED; 
+      143 +      } else {                                                
+      144 +        if (keys['w'] || keys['W']) left.y -= PADDLE_SPEED;   
+      145 +        if (keys['s'] || keys['S']) left.y += PADDLE_SPEED;   
+      146 +      }                                                       
+      147  
+      148        if (keys['ArrowUp'])   right.y -= PADDLE_SPEED;
+      149        if (keys['ArrowDown']) right.y += PADDLE_SPEED;
+
+● Done. Here's what changed:
+
+  - A retro-styled "⋮ 2 PLAYER" button appears below the canvas. Clicking it
+  switches modes and resets the score.
+  - In 1-player mode (default): left paddle is AI-controlled, button reads "⋮ 2
+  PLAYER" (click to switch).
+  - In 2-player mode: left paddle uses W/S, button reads "⋮ 1 PLAYER" (click to
+  switch back).
+  - The controls hint text updates automatically to match the current mode.
+
+✻ Cooked for 39s
+
+❯ The interface is confusing.  It states "1 player" when it's in two player     
+  mode and vice versa.  Could you change it so it uses a mode toggle button     
+  that has "1" on one side and "2" on the other with "Players" above it?        
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(pong.html)
+  ⎿  Added 31 lines, removed 10 lines
+      32        letter-spacing: 0.08em;
+      33        text-align: center;
+      34      }
+      35 -    #modeBtn {                                                 
+      36 -      background: #000;                                        
+      37 -      color: #00ff41;                                          
+      35 +    #modeWidget {                                              
+      36 +      display: flex;                                           
+      37 +      flex-direction: column;                                  
+      38 +      align-items: center;                                     
+      39 +      gap: 4px;                                                
+      40 +    }                                                          
+      41 +    #modeLabel {                                               
+      42 +      font-size: 11px;                                         
+      43 +      color: #007722;                                          
+      44 +      letter-spacing: 0.15em;                                  
+      45 +    }                                                          
+      46 +    #modeToggle {                                              
+      47 +      display: flex;                                           
+      48        border: 2px solid #00ff41;
+      49 +      box-shadow: 0 0 8px #00ff41;                             
+      50 +    }                                                          
+      51 +    .modeOpt {                                                 
+      52 +      background: #000;                                        
+      53 +      color: #007722;                                          
+      54 +      border: none;                                            
+      55        font-family: 'Courier New', monospace;
+      40 -      font-size: 12px;                                         
+      41 -      letter-spacing: 0.1em;                                   
+      42 -      padding: 5px 14px;                                       
+      56 +      font-size: 16px;                                         
+      57 +      font-weight: bold;                                       
+      58 +      width: 36px;                                             
+      59 +      height: 32px;                                            
+      60        cursor: pointer;
+      44 -      box-shadow: 0 0 8px #00ff41;                             
+      45 -      transition: background 0.15s, color 0.15s;               
+      46 -      white-space: nowrap;                                     
+      61 +      transition: background 0.12s, color 0.12s;               
+      62      }
+      48 -    #modeBtn:hover {                                           
+      63 +    .modeOpt:first-child {                                     
+      64 +      border-right: 2px solid #00ff41;                         
+      65 +    }                                                          
+      66 +    .modeOpt.active {                                          
+      67        background: #00ff41;
+      68        color: #000;
+      69      }
+      70 +    .modeOpt:not(.active):hover {                              
+      71 +      color: #00ff41;                                          
+      72 +    }                                                          
+      73    </style>
+      74  </head>
+      75  <body>
+
+● Update(pong.html)
+  ⎿  Added 7 lines, removed 1 line
+      75  <body>
+      76    <canvas id="pong" width="800" height="500"></canvas>
+      77    <div id="ui">
+      78 -    <button id="modeBtn">&#x22EE; 2 PLAYER</button>            
+      78 +    <div id="modeWidget">                                      
+      79 +      <div id="modeLabel">PLAYERS</div>                        
+      80 +      <div id="modeToggle">                                    
+      81 +        <button class="modeOpt active" id="btn1">1</button>    
+      82 +        <button class="modeOpt"        id="btn2">2</button>    
+      83 +      </div>                                                   
+      84 +    </div>                                                     
+      85      <div id="controls"></div>
+      86    </div>
+      87    <script>
+
+● Now update the JS to use the two buttons instead of the single modeBtn:
+
+● Update(pong.html)
+  ⎿  Added 13 lines, removed 11 lines
+      105      let animId      = null;
+      106      let singlePlayer = true;
+      107  
+      108 -    const modeBtn    = document.getElementById('modeBtn');    
+      108 +    const btn1       = document.getElementById('btn1');       
+      109 +    const btn2       = document.getElementById('btn2');       
+      110      const controlsEl = document.getElementById('controls');
+      111  
+      112      function updateModeUI() {
+      112 -      if (singlePlayer) {                                     
+      113 -        modeBtn.textContent    = '⋮ 2 PLAYER';                
+      114 -        controlsEl.innerHTML   = 'COMPUTER &mdash; LEFT &nbsp;
+          -&nbsp;|&nbsp;&nbsp; &uarr;&darr; &mdash; RIGHT &nbsp;&nbsp;|&n
+          -bsp;&nbsp; SPACE &mdash; PAUSE';                              
+      115 -      } else {                                                
+      116 -        modeBtn.textContent    = '⋮ 1 PLAYER';                
+      117 -        controlsEl.innerHTML   = 'W/S &mdash; LEFT &nbsp;&nbsp
+          -;|&nbsp;&nbsp; &uarr;&darr; &mdash; RIGHT &nbsp;&nbsp;|&nbsp;&
+          -nbsp; SPACE &mdash; PAUSE';                                   
+      118 -      }                                                       
+      113 +      btn1.classList.toggle('active',  singlePlayer);         
+      114 +      btn2.classList.toggle('active', !singlePlayer);         
+      115 +      controlsEl.innerHTML = singlePlayer                     
+      116 +        ? 'COMPUTER &mdash; LEFT &nbsp;&nbsp;|&nbsp;&nbsp; &ua
+          +rr;&darr; &mdash; RIGHT &nbsp;&nbsp;|&nbsp;&nbsp; SPACE &mdash
+          +; PAUSE'                                                      
+      117 +        : 'W/S &mdash; LEFT &nbsp;&nbsp;|&nbsp;&nbsp; &uarr;&d
+          +arr; &mdash; RIGHT &nbsp;&nbsp;|&nbsp;&nbsp; SPACE &mdash; PAU
+          +SE';                                                          
+      118      }
+      119  
+      121 -    modeBtn.addEventListener('click', () => {                 
+      122 -      singlePlayer = !singlePlayer;                           
+      120 +    function setMode(single) {                                
+      121 +      singlePlayer = single;                                  
+      122        score.left   = 0;
+      123        score.right  = 0;
+      124        ball         = spawnBall();
+      125        updateModeUI();
+      127 -    });                                                       
+      126 +    }                                                         
+      127  
+      128 +    btn1.addEventListener('click', () => setMode(true));      
+      129 +    btn2.addEventListener('click', () => setMode(false));     
+      130 +                                                              
+      131      updateModeUI();
+      132  
+      133      const left  = { x: 20,              y: H/2 - PADDLE_H/2, w
+           : PADDLE_W, h: PADDLE_H };
+● The toggle now shows "PLAYERS" above and two buttons — 1 and 2 — side by side.
+   The active one is filled green-on-black; the inactive one is dim. Clicking
+  either button directly selects that mode and resets the score, with no
+  ambiguity about which mode is active.
+
+✻ Cogitated for 29s
+
+※ recap: We're building a retro Pong game in a single HTML file. The last change replaced a confusing toggle button with a clear "PLAYERS" widget showing "1" and "2" side by side, with the active mode highlighted. (disable recaps in /config)
+
+❯ Looks great.  Can you convert pong.html so that it is now in C and port it to 
+   X11 so that it can be compiled and run on Linux?                             
+
+● I'll create pong.c and a Makefile in the same directory.
+
+● Write(pong.c)
+  ⎿  Wrote 400 lines to pong.c
+       1 #define _GNU_SOURCE
+       2 #include <X11/Xlib.h>
+       3 #include <X11/Xutil.h>
+       4 #include <X11/keysym.h>
+       5 #include <X11/Xft/Xft.h>
+       6 #include <math.h>
+       7 #include <stdio.h>
+       8 #include <stdlib.h>
+       9 #include <string.h>
+      10 #include <time.h>
+     … +414 lines (ctrl+o to expand)
+
+● Write(Makefile)
+  ⎿  Wrote 11 lines to Makefile
+      1 CC      = cc
+      2 CFLAGS  = -O2 -Wall -Wextra
+      3 LDLIBS  = -lX11 -lXft -lm
+      4 
+      5 pong: pong.c
+      6         $(CC) $(CFLAGS) -o pong pong.c $(LDLIBS)
+      7 
+      8 clean:
+      9         rm -f pong
+     … +1 line (ctrl+o to expand)
+
+● Let's do a test build:
+
+● Bash(make 2>&1)
+  ⎿  Error: Exit code 2
+     cc -O2 -Wall -Wextra -o pong pong.c -lX11 -lXft -lm
+     In file included from pong.c:5:
+     /usr/include/X11/Xft/Xft.h:40:10: fatal error: ft2build.h: No such file or 
+     directory
+        40 | #include <ft2build.h>
+           |          ^~~~~~~~~~~~
+     compilation terminated.
+     make: *** [Makefile:6: pong] Error 1
+
+● Bash(rpm -q freetype-devel libXft-devel 2>&1; find /usr/include -name
+      ft2build.h 2>/dev/null)
+  ⎿  freetype-devel-2.14.3-1.fc44.x86_64
+     libXft-devel-2.3.8-10.fc44.x86_64
+     /usr/include/freetype2/ft2build.h
+
+● ft2build.h lives under freetype2/, so the compiler needs that include path.
+  Let me fix the Makefile:
+
+● Update(Makefile)
+  ⎿  Added 1 line, removed 1 line
+      1  CC      = cc
+      2 -CFLAGS  = -O2 -Wall -Wextra                                     
+      2 +CFLAGS  = -O2 -Wall -Wextra $(shell pkg-config --cflags freetype
+        +2 xft 2>/dev/null)                                              
+      3  LDLIBS  = -lX11 -lXft -lm
+      4  
+      5  pong: pong.c
+
+● Bash(make 2>&1)
+  ⎿  cc -O2 -Wall -Wextra -I/usr/include/libxml2 -I/usr/include/freetype2 -
+     I/usr/include/libpng16 -DWITH_GZFILEOP -I/usr/include/harfbuzz -I/usr/
+     include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/sysprof-
+     6 -pthread -o pong pong.c -lX11 -lXft -lm
+
+● Clean compile, zero warnings. Here's a summary:
+
+  Files created:
+  - pong.c — full C/X11 implementation
+  - Makefile — build with make, clean with make clean
+
+  Build dependencies (already installed on your system):
+  libX11-devel  libXft-devel  freetype-devel
+
+  What's the same as the HTML version:
+  - Green-on-black palette, dashed center line, large score digits
+  - Ball angle/speed-up physics on paddle hits
+  - AI left paddle (single-player) vs W/S (two-player)
+  - Clickable 1 / 2 PLAYERS toggle (resets score on switch)
+  - Space to pause, pause overlay
+
+  What's different/added:
+  - Q or Escape quits
+  - Double-buffered with an off-screen Pixmap (no flicker)
+  - Fonts via Xft (monospace:bold) — whatever your system monospace font is
+
+✻ Worked for 12m 49s
+
+❯ I ran it.  When I resize the X11 window opening by the pong binary, the       
+  contents of the window (the game) does not resize with the change.  Can you   
+  update the game so that it scales with the resize?                            
+
+● The cleanest approach is to render the game to the fixed-size back buffer as
+  before, then use the XRender extension to scale it to the window at blit time.
+   That way the game logic is untouched — only the final "copy to screen" step
+  changes.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(pong.c)
+  ⎿  Added 1 line
+      3  #include <X11/Xutil.h>
+      4  #include <X11/keysym.h>
+      5  #include <X11/Xft/Xft.h>
+      6 +#include <X11/extensions/Xrender.h>                             
+      7  #include <math.h>
+      8  #include <stdio.h>
+      9  #include <stdlib.h>
+
+● Update(pong.c)
+  ⎿  Added 3 lines
+      56  static unsigned long px_green_dim;
+      57  static unsigned long px_black;
+      58  
+      59 +static int     win_w = GAME_W, win_h = WIN_H; /* current window
+         + size */                                                       
+      60 +static Picture src_pic, dst_pic;               /* XRender pictu
+         +res    */                                                      
+      61 +                                                               
+      62  /* ── Game state ──────────────────────────────────────── */
+      63  static int    single_player = 1;
+      64  static int    paused        = 0;
+
+● Update(pong.c)
+  ⎿  Added 2 lines, removed 1 line
+      312      XSetWindowAttributes swa = {0};
+      313      swa.background_pixel = px_black;
+      314      swa.event_mask = KeyPressMask | KeyReleaseMask |
+      315 -                     ButtonPressMask | ExposureMask;          
+      315 +                     ButtonPressMask | ExposureMask |         
+      316 +                     StructureNotifyMask;                     
+      317      win = XCreateWindow(dpy, RootWindow(dpy, scr),
+      318                          100, 100, GAME_W, WIN_H, 0,
+      319                          CopyFromParent, InputOutput, vis,
+
+● Update(pong.c)
+  ⎿  Added 6 lines
+      327      buf   = XCreatePixmap(dpy, win, GAME_W, WIN_H, DefaultDept
+           h(dpy, scr));
+      328      xdraw = XftDrawCreate(dpy, buf, vis, cmap);
+      329  
+      330 +    XRenderPictFormat      *rfmt  = XRenderFindVisualFormat(dp
+          +y, vis);                                                      
+      331 +    XRenderPictureAttributes pattr = {0};                     
+      332 +    src_pic = XRenderCreatePicture(dpy, buf, rfmt, 0, &pattr);
+      333 +    dst_pic = XRenderCreatePicture(dpy, win, rfmt, 0, &pattr);
+      334 +    XRenderSetPictureFilter(dpy, src_pic, FilterBilinear, NULL
+          +, 0);                                                         
+      335 +                                                              
+      336      alloc_xft("#00ff41", &xft_green);
+      337      alloc_xft("#007722", &xft_green_med);
+      338      alloc_xft("#000000", &xft_black);
+
+● Now add blit_scaled() just before draw_frame() and update draw_frame() to call
+   it:
+
+● Update(pong.c)
+  ⎿  Added 38 lines
+      259      draw_cx(font_ui,    &xft_green_med, GAME_W / 2, by + 74, "
+           PRESS SPACE TO RESUME");
+      260  }
+      261  
+      262 +/* Scale the fixed back-buffer onto the current window, preser
+          +ving aspect                                                   
+      263 +   ratio and painting black bars in any unused margin. */     
+      264 +static void blit_scaled(void)                                 
+      265 +{                                                             
+      266 +    double sx    = (double)win_w / GAME_W;                    
+      267 +    double sy    = (double)win_h / WIN_H;                     
+      268 +    double scale = sx < sy ? sx : sy;                         
+      269 +    int dw = (int)(GAME_W * scale);                           
+      270 +    int dh = (int)(WIN_H  * scale);                           
+      271 +    if (dw < 1) dw = 1;                                       
+      272 +    if (dh < 1) dh = 1;                                       
+      273 +    int dx = (win_w - dw) / 2;                                
+      274 +    int dy = (win_h - dh) / 2;                                
+      275 +                                                              
+      276 +    /* inverse scale transform on the source picture */       
+      277 +    XTransform xform = {{                                     
+      278 +        { XDoubleToFixed((double)GAME_W / dw), 0, 0 },        
+      279 +        { 0, XDoubleToFixed((double)WIN_H  / dh), 0 },        
+      280 +        { 0, 0, XDoubleToFixed(1.0) }                         
+      281 +    }};                                                       
+      282 +    XRenderSetPictureTransform(dpy, src_pic, &xform);         
+      283 +                                                              
+      284 +    /* black letterbox / pillarbox bars */                    
+      285 +    XSetForeground(dpy, gc, px_black);                        
+      286 +    if (dx > 0) {                                             
+      287 +        XFillRectangle(dpy, win, gc, 0,       0, dx,          
+          +    win_h);                                                   
+      288 +        XFillRectangle(dpy, win, gc, dx + dw, 0, win_w - dx - 
+          +dw, win_h);                                                   
+      289 +    }                                                         
+      290 +    if (dy > 0) {                                             
+      291 +        XFillRectangle(dpy, win, gc, 0, 0,       win_w, dy);  
+      292 +        XFillRectangle(dpy, win, gc, 0, dy + dh, win_w, win_h 
+          +- dy - dh);                                                   
+      293 +    }                                                         
+      294 +                                                              
+      295 +    XRenderComposite(dpy, PictOpSrc, src_pic, None, dst_pic,  
+      296 +                     0, 0, 0, 0, dx, dy, dw, dh);             
+      297 +    XFlush(dpy);                                              
+      298 +}                                                             
+      299 +                                                              
+      300  static void draw_frame(void)
+      301  {
+      302      fill_rect(0, 0, GAME_W, GAME_H, px_black);
+
+● Update(pong.c)
+  ⎿  Added 1 line, removed 2 lines
+      310               BALL_R * 2, BALL_R * 2, 0, 360 * 64);
+      311      if (paused) draw_pause_overlay();
+      312      draw_ui();
+      313 -    XCopyArea(dpy, buf, win, gc, 0, 0, GAME_W, WIN_H, 0, 0);  
+      314 -    XFlush(dpy);                                              
+      313 +    blit_scaled();                                            
+      314  }
+      315  
+      316  /* ── Button hit-test ─────────────────────────────────── */
+● Now handle ConfigureNotify in the event loop:
+
+● Update(pong.c)
+  ⎿  Added 4 lines
+      417              case ButtonPress:
+      418                  handle_click(ev.xbutton.x, ev.xbutton.y);
+      419                  break;
+      420 +            case ConfigureNotify:                             
+      421 +                win_w = ev.xconfigure.width;                  
+      422 +                win_h = ev.xconfigure.height;                 
+      423 +                break;                                        
+      424              case ClientMessage:
+      425                  if ((Atom)ev.xclient.data.l[0] == wm_del)
+      426                      running = 0;
+
+● Add cleanup for the Pictures before closing the display:
+
+● Update(pong.c)
+  ⎿  Added 2 lines
+      443      XftColorFree(dpy, vis, cmap, &xft_green);
+      444      XftColorFree(dpy, vis, cmap, &xft_green_med);
+      445      XftColorFree(dpy, vis, cmap, &xft_black);
+      446 +    XRenderFreePicture(dpy, src_pic);                         
+      447 +    XRenderFreePicture(dpy, dst_pic);                         
+      448      XftDrawDestroy(xdraw);
+      449      XFreePixmap(dpy, buf);
+      450      XFreeGC(dpy, gc);
+
+● Now add -lXrender to the Makefile:
+
+● Update(Makefile)
+  ⎿  Added 1 line, removed 1 line
+      1  CC      = cc
+      2  CFLAGS  = -O2 -Wall -Wextra $(shell pkg-config --cflags freetype
+         2 xft 2>/dev/null)
+      3 -LDLIBS  = -lX11 -lXft -lm                                       
+      3 +LDLIBS  = -lX11 -lXft -lXrender -lm                             
+      4  
+      5  pong: pong.c
+      6    $(CC) $(CFLAGS) -o pong pong.c $(LDLIBS)
+
+● Bash(make 2>&1)
+  ⎿  cc -O2 -Wall -Wextra -I/usr/include/libxml2 -I/usr/include/freetype2 -
+     I/usr/include/libpng16 -DWITH_GZFILEOP -I/usr/include/harfbuzz -I/usr/
+     include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/sysprof-
+     6 -pthread -o pong pong.c -lX11 -lXft -lXrender -lm
+
+● Clean. Here's what changed and how it works:
+
+  Approach — the game still renders to a fixed 800×556 back-buffer every frame.
+  Only the final blit to the window is new:
+
+  1. ConfigureNotify events update win_w/win_h whenever the window is resized.
+  2. blit_scaled() computes a uniform scale factor (min(win_w/800, win_h/556))
+  so the game always fits without distortion.
+  3. An XRender inverse-scale transform is applied to the source picture, then
+  XRenderComposite does a bilinear-filtered blit into the window at the correct
+  size and position.
+  4. Black bars are painted in any unused margin (letterbox or pillarbox
+  depending on the window's aspect ratio).
+
+✻ Churned for 2m 51s
+
+※ recap: A Pong game in HTML and C/X11 with green-on-black retro style, single/two-player toggle, and resize scaling. No pending tasks; the user can run make and play. (disable recaps in /config)
