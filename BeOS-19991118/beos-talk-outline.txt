@@ -1,0 +1,86 @@
+Overview of BeOS
+    Modern OS
+    Pentium / PPC
+    "Multi-Media" OS
+    AmigaOS done right
+
+The Company
+  - Jean-Louis Gassee
+     president of Apple's product division
+     colorful spokeman that John Sculley, CEO, didn't appreciate
+     relationship ended when Sculley asked Gassee what he thought of him
+     last day at Apple 9/30/1990
+  - The idea for Be started in early 1990
+  - BeOS started in early 1991
+  - Hobbit / many cheap processors better than one fast expensive processor
+  - Moved to PPC early 1995 (BeBox) and then on Mac in 8/96
+  - Added Pentium 8/97
+  - Problem with G3/G4 Apple systems
+  - PPC support discontinued after R5
+  - Stock 3 9/32, 18 11/16, close today 13 5/8
+
+Web Site
+  - www.be.com
+  - BeWare "www.be.com/software/beware" like Aminet/VersionTracker
+
+Features
+  AmigaOS-like features
+    - Pre-emptive multi-tasking
+    - Multi-threaded
+    - Message-passing (asynch/reply-based)
+    - Pervasive multi-threading
+
+  "Modern" OS Features
+    - Symmetric multi-processing
+    - Virtual Memory
+    - File System
+        . Journaled 64-bit
+        . Database-like
+        . Attributes
+        . Resources
+    - Extensible
+        . Add-ons/Plug-ins
+    - Dynamically loaded device drivers
+
+  Very fast boot time
+  Stable
+
+  CLI & GUI
+
+  IDE Slave Support
+
+Tracker (Workbench, Finder)
+  - Workspaces (Public Screens)
+  - Contextual Menus (2nd button)
+
+OS Installation ease
+
+App Installation / Software Valet
+
+Directory organization
+  - Boot
+  - Home
+
+Queries
+
+File types
+
+Decent Web Support
+  - PPP / PAP
+  - Netpositive
+     . No javascript or java, Sun deal for 1Q2000 for Java 2
+
+Demos
+  - BeBounce
+  - Opus
+
+Limitations
+  - h/w support
+  - little general-purpose software (Gobe productive)
+
+Amiga programmer cross-overs
+
+Programmed in C++
+
+Availability
+   - Gigabuys (Dell) $43 CD / $47 (w/ book)  / $?? with Gobe
